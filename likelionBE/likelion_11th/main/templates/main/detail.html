@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h1>{{post.title}}</h1>
+번호 : {{post.post_num}}
+작성자 : {{post.writer}}
+날짜 : {{post.pub_date}}
+좋아하는동물 : {{post.fanname}}
+
+<hr>
+<p>{{post.body}}</p>
+
+<p> 태그👽 {{post.hashtag}}</p>
+{% endblock %}

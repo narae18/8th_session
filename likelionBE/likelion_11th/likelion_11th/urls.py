@@ -22,4 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.mainpage, name="mainpage"),
     path('second/', views.secondpage, name="secondpage"),
+    path('new/', views.new, name="new"), #빈칸이 있는 사이트
+    path('create/', views.create, name="create"), #적어서 저장하는 사이트
+    path('<int:id>', views.detail,name="detail"),
 ]

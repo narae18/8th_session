@@ -2,13 +2,41 @@
 {% load static %}
 {% block content %}
 
-<p><b><font size="7"; color="green"; face="맑은고딕"> 🐛동 물 도 감🐛 </font></b> </p>
+<div style="background-color: pink; padding: 20px; text-align: center;">
+  <p style="font-family: 'DungGeunMo', sans-serif; font-size: 40px; color: green;">
+    🐇동 물 정 보 게 시 판🐟
+  </p>
+</div>
 
-  <a href="https://imgbb.com/"><img src="https://i.ibb.co/0VGjvRp/sigoljabjong.jpg" alt="sigoljabjong" border="0"></a><br /><a target='_blank' href='https://imgbb.com/'>picture upload site</a><br />
-  <body>
 
-    <p>회원 가입을 하고 더 많은 정보를 받아보세요ƪ(˘  ⌣  ˘)ʃ</p>
+
+<div style="text-align: center;">
+  <a href="https://imgbb.com/"><img src="https://i.ibb.co/0VGjvRp/sigoljabjong.jpg" alt="sigoljabjong" border="0"></a><br>
+  <a target='_blank' href='https://imgbb.com/'>picture upload site</a><br>
+  <br>
+  <br>
+  <p style="font-size: 20px;">회원 가입을 하고 더 많은 정보를 받아보세요ƪ(˘  ⌣  ˘)ʃ</p>
+  <br>
+  <br>
+  <a href="{% url 'new' %}" style="font-size: 20px; padding: 10px 20px; border: 2px solid green; border-radius: 5px; background-color: #4CAF50; color: #fff; text-decoration: none;">글쓰기</a>
+</div>
+
     
+    
+    <div>
+    {% for post in post%}
+      <div>
+        <h3>{{post.title}}</h3>
+        {{post.writer}}<br>
+        {{post.summary}}
+        <a href="{%url 'detail' post.id %}">...more☕</a>
+        </br>
+      </div>
+      {% endfor %}
+    </div>
+
+  
+
     </body>
 
 {% endblock %}
