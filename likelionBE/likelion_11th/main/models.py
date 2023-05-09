@@ -9,6 +9,7 @@ class Post(models.Model):
     body = models.TextField()
     fanname = models.CharField(max_length=50)
     hashtag = models.CharField(max_length=50)
+    image = models.ImageField(upload_to="post/", blank=True, null=True)
     
     
     def __str__(self):

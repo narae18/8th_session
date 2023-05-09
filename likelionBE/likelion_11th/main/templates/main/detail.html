@@ -10,7 +10,11 @@
 좋아하는동물 : {{post.fanname}}
 
 <hr>
+{% if post.image %}
+    <p><img src="{{ post.image.url }}" alt="🖼️"></p>
+{% endif %}
 <p>{{post.body}}</p>
-
+<a href = "{% url 'main:edit' post.id %}">수정</a>
+<a href = "{% url 'main:delete' post.id %}">삭제</a>
 <p> 태그👽 {{post.hashtag}}</p>
 {% endblock %}
