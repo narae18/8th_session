@@ -32,22 +32,27 @@ def logout(request):
 
 def signup(request):
     if request.method == 'POST':
+        password = request.POST['password']
+        confirm = request.POST['confirm']
+        
+        if password == confirm:
+            username = request.POST['username']
+            user = User.objects.create_user(username=username, password=password)
 
-        if request.POST['password'] == request.POST['confirm']:
-            user = User.objects.create_user(
-                username=request.POST['username'],
-                password=request.POST['password']
-            )
-            nickname=request.POST['nickname']
-            department=request.POST['department']
-            reason=request.POST['reason']
-
+            nickname = request.POST['nickname']
+            department = request.POST['department']
+            reason = request.POST['reason']
 
             profile = Profile(user=user, nickname=nickname, department=department, reason=reason)
             profile.save()
-            auth.login(request,user)
-            return redirect('/')
-    return render(request,'accounts/signup.html')
+
+            auth.login(request, user)
+            return redirect('main:mainpage')
+        else:
+            return render(request, 'accounts/signup.html', {'error': 'Passwords do not match'})
+
+    return render(request, 'accounts/signup.html')
+
 
 
     
