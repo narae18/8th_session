@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <h3>{{user.username}}</h3>
+    {% if request.user != user %}
+        {% if request.user.profile in user.profile.followers.all %}
+            <a href=" {% url 'users:follow' user.id %}"><button type="button" class="btn btn-outline-info">언팔로우</button></a>
+      
+        {% else %}
+            <a href="{% url 'users:follow' user.id %}"><button type="button" class="btn btn-info">팔로우</button></a>
+      
+        {% endif %}
+    {% endif %}
+
+        <p>팔로워<br>{{user.profile.followers.count}}명</p>
+        {%for follower in user.profile.followers.all %}
+            <a href="{% url 'users:mypage' follower.user.id %}">{{follower.user.username}}</a>
+        {%endfor%}
+
+        <p>팔로잉<br>{{user.profile.followings.count}}명</p>
+        {%for following in user.profile.followings.all %}
+            <a href="{% url 'users:mypage' following.user.id %}">{{following.user.username}}</a>
+        {%endfor%}
+
+    <div>
+        작성한 글 :
+        {% for post in posts %}
+        <a href="{% url 'main:detail' post.id %}">{{post.title}}</a>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

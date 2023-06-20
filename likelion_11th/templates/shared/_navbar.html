@@ -20,14 +20,26 @@
         <li class="nav-item dropdown">
             {% if user.is_authenticated %}
             <!--로그인시 보이는 화면-->
+            {% if request.user == user.username %}
+
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-             {{user.username}}
+            {{user.username}}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-             <li><a class="dropdown-item" href="{%url 'accounts:logout'%}">로그아웃</a></li>
+                <li><a class="dropdown-item" href="{%url 'accounts:logout'%}">로그아웃</a></li>
+                <li><a class="dropdown-item" href="{%url 'users:mypage' user.id%}">마이페이지</a></li>
             </ul>
     
-        
+            {% else %}
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{request.user.username}}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+             <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">로그아웃</a></li>
+             <li><a class="dropdown-item" href="{% url 'users:mypage' request.user.id %}">mypage</a></li>
+            </ul>
+            {% endif %}
+            
             {% else %}
     
             <!--로그아웃시 보이는 화면-->

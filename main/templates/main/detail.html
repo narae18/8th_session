@@ -5,7 +5,12 @@
 
 <h1>{{post.title}}</h1>
 번호 : {{post.post_num}}
-작성자 : {{post.writer}}
+{% if post.writer %}
+<a href="{% url 'users:mypage' post.writer.id %}">작성자 : {{post.writer}}</a><br>
+{% else %}
+작성자 : 알수없음 <br>
+{% endif %}
+
 날짜 : {{post.pub_date}}
 좋아하는동물 : {{post.fanname}}
 
@@ -21,6 +26,16 @@
 <a href = "{% url 'main:delete' post.id %}">삭제</a>
 <p> 태그👽 {{post.hashtag}}</p>
 {% endif %}
+
+<a href="{%url 'main:likes' post.id %}">
+    {% if user in post.like.all%}
+    취소
+    {% else %}
+    좋아요
+    {% endif %}
+</a>
+
+{{post.like_count}}개
 
 
 
